@@ -38,3 +38,10 @@ nbdist/
 .nb-gradle/
 
 # End of https://www.gitignore.io/api/java,netbeans
+*.properties
+dist/Slideshow(Multithread).html
+build/classes/slideshow/multithread/Slideshow.class
+build/classes/slideshow/multithread/SlideshowUIController.class
+dist/Slideshow(Multithread).html
+dist/Slideshow(Multithread).jar
+dist/Slideshow(Multithread).jnlp

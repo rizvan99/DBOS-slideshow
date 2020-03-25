@@ -18,9 +18,9 @@ public class Slideshow
     private final long DELAY = 1;
     private int index = 0;
     private ImageView imgView;
-    private List<Image> images;
+    private List<Images> images;
 
-    public Slideshow(ImageView imgView, List<Image> images)
+    public Slideshow(ImageView imgView, List<Images> images)
     {
         this.imgView = imgView;
         this.images = images;

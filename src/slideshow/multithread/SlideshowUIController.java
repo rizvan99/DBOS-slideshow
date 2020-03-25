@@ -7,12 +7,14 @@ package slideshow.multithread;
 
 import java.io.File;
 import java.net.URL;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.ResourceBundle;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Button;
+import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.stage.FileChooser;
 import javafx.stage.FileChooser.ExtensionFilter;
@@ -24,6 +26,7 @@ import javafx.stage.Stage;
  */
 public class SlideshowUIController implements Initializable
 {
+    List<Images> images = new ArrayList<>();
     
     @FXML
     private Button btnLoadImages;
@@ -57,7 +60,14 @@ public class SlideshowUIController implements Initializable
         fc.getExtensionFilters().add(new ExtensionFilter ("Images", "*.img", "*.jpg", "*.jpeg", "*.png"));
         List<File> files = fc.showOpenMultipleDialog(new Stage());
         
-        
+        if (files != null)
+        {
+            files.forEach((File file) ->
+            {
+                imageView.setImage(new Image(file.toURI().toString())); //NEEDS TO LOAD ALL SELECTED IMAGES INTO LIST
+            }
+            );
+        }
         
         
     }
