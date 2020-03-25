@@ -7,15 +7,16 @@ package slideshow.multithread;
 
 import java.io.File;
 import java.net.URL;
+import java.util.List;
 import java.util.ResourceBundle;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Button;
-import javafx.scene.control.Label;
 import javafx.scene.image.ImageView;
-import javax.swing.JFileChooser;
-import javax.swing.filechooser.FileNameExtensionFilter;
+import javafx.stage.FileChooser;
+import javafx.stage.FileChooser.ExtensionFilter;
+import javafx.stage.Stage;
 
 /**
  *
@@ -51,12 +52,11 @@ public class SlideshowUIController implements Initializable
     @FXML
     private void handleLoadImages(ActionEvent event)
     {
-        JFileChooser jfc = new JFileChooser();
-        FileNameExtensionFilter jpg = new FileNameExtensionFilter(".jpg Files", "jpg", "jpeg");
-        FileNameExtensionFilter png = new FileNameExtensionFilter(".png Files", "png");
-        jfc.setFileFilter(png);
-        jfc.setFileFilter(jpg);
-        jfc.setCurrentDirectory(new File("."));
+        FileChooser fc = new FileChooser();
+        fc.setTitle("Choose images for slideshow");
+        fc.getExtensionFilters().add(new ExtensionFilter ("Images", "*.img", "*.jpg", "*.jpeg", "*.png"));
+        List<File> files = fc.showOpenMultipleDialog(new Stage());
+        
         
         
         
