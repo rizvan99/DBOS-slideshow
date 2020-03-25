@@ -8,7 +8,7 @@
     <update check="always"/>
     <resources>
         <j2se version="9.0.4+" href="http://java.sun.com/products/autodl/j2se"/>
-        <jar href="Slideshow(Multithread).jar" size="4819" download="eager"/>
+        <jar href="Slideshow(Multithread).jar" size="4820" download="eager"/>
     </resources>
     <jfx:javafx-desc width="800" height="600" main-class="slideshow.multithread.MainApp" name="MainApp"/>
 </jnlp>
