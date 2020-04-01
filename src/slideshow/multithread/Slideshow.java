@@ -13,20 +13,20 @@ import javafx.scene.image.ImageView;
  *
  * @author Rizvan
  */
-public class Slideshow
+public class Slideshow implements Runnable
 {
     private final long DELAY = 1;
     private int index = 0;
     private ImageView imgView;
-    private List<Images> images;
+    private List<Image> images;
 
-    public Slideshow(ImageView imgView, List<Images> images)
+    public Slideshow(ImageView imgView, List<Image> images)
     {
         this.imgView = imgView;
         this.images = images;
     }
     
-    //@Override
+    @Override
     public void run(){
         if (!images.isEmpty()){
             try{

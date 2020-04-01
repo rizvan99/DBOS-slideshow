@@ -26,7 +26,7 @@ import javafx.stage.Stage;
  */
 public class SlideshowUIController implements Initializable
 {
-    List<Images> images = new ArrayList<>();
+    List<Image> images = new ArrayList<>();
     
     @FXML
     private Button btnLoadImages;
@@ -62,12 +62,12 @@ public class SlideshowUIController implements Initializable
         
         if (files != null)
         {
-            files.forEach((File file) ->
+            for (File file : files)
             {
                 imageView.setImage(new Image(file.toURI().toString())); //NEEDS TO LOAD ALL SELECTED IMAGES INTO LIST
             }
-            );
         }
+        
         
         
     }

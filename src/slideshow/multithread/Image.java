@@ -9,7 +9,7 @@ package slideshow.multithread;
  *
  * @author Rizvan
  */
-public class Images
+public class Image
 {
     
     private String imagePath;
