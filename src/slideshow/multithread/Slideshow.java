@@ -17,14 +17,16 @@ public class Slideshow implements Runnable
 {
     private final long DELAY = 1;
     private int index = 0;
-    private ImageView imgView;
+    private ImageView imageView;
     private List<Image> images;
 
-    public Slideshow(ImageView imgView, List<Image> images)
+    public Slideshow(ImageView imageView, List<Image> images)
     {
-        this.imgView = imgView;
+        this.imageView = imageView;
         this.images = images;
     }
+
+   
     
     @Override
     public void run(){

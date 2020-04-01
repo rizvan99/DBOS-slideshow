@@ -9,6 +9,7 @@ import java.io.File;
 import java.net.URL;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.ListIterator;
 import java.util.ResourceBundle;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
@@ -27,6 +28,7 @@ import javafx.stage.Stage;
 public class SlideshowUIController implements Initializable
 {
     List<Image> images = new ArrayList<>();
+    private int imageIndex = 0;
     
     @FXML
     private Button btnLoadImages;
@@ -64,8 +66,9 @@ public class SlideshowUIController implements Initializable
         {
             for (File file : files)
             {
-                imageView.setImage(new Image(file.toURI().toString())); //NEEDS TO LOAD ALL SELECTED IMAGES INTO LIST
+                images.add(new Image(file.toURI().toString()));
             }
+            imageView.setImage(images.get(0));
         }
         
         
@@ -75,16 +78,29 @@ public class SlideshowUIController implements Initializable
     @FXML
     private void handleNextImage(ActionEvent event)
     {
+        if (!images.isEmpty())
+        {
+            imageIndex = (imageIndex - 1 + images.size()) % images.size();
+            imageView.setImage(images.get(imageIndex));
+        }
     }
 
     @FXML
     private void handlePreviousImage(ActionEvent event)
     {
+        if (!images.isEmpty())
+        {
+            imageIndex = (imageIndex + 1 + images.size()) % images.size();
+            imageView.setImage(images.get(imageIndex));
+        }
     }
 
     @FXML
     private void handleStartSlideshow(ActionEvent event)
     {
+       
+        
+        
     }
 
     @FXML
