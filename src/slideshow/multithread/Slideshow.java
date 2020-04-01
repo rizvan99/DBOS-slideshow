@@ -7,6 +7,7 @@ package slideshow.multithread;
 
 import java.util.List;
 import java.util.concurrent.TimeUnit;
+import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 
 /**
@@ -27,13 +28,13 @@ public class Slideshow implements Runnable
     }
 
    
-    
+
     @Override
     public void run(){
         if (!images.isEmpty()){
             try{
                 while (true){
-                    //imgView.setImage(images.get(index)); 
+                    imageView.setImage(images.get(index)); 
                     index = (index + 1) % images.size();
                     TimeUnit.SECONDS.sleep(DELAY);                                        
                 }

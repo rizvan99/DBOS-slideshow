@@ -9,8 +9,10 @@ import java.io.File;
 import java.net.URL;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.ListIterator;
 import java.util.ResourceBundle;
+import java.util.concurrent.Executor;
+import java.util.concurrent.ExecutorService;
+import java.util.concurrent.Executors;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
@@ -27,8 +29,9 @@ import javafx.stage.Stage;
  */
 public class SlideshowUIController implements Initializable
 {
-    List<Image> images = new ArrayList<>();
+    private final List<Image> images = new ArrayList<>();
     private int imageIndex = 0;
+    private ExecutorService executor;
     
     @FXML
     private Button btnLoadImages;
@@ -98,6 +101,9 @@ public class SlideshowUIController implements Initializable
     @FXML
     private void handleStartSlideshow(ActionEvent event)
     {
+       Runnable slideshow = new Slideshow(imageView, images);
+       executor = Executors.newSingleThreadExecutor();
+       executor.submit(slideshow);
        
         
         
@@ -106,6 +112,7 @@ public class SlideshowUIController implements Initializable
     @FXML
     private void handleStopSlideshow(ActionEvent event)
     {
+        executor.shutdownNow();
     }
     
 }
