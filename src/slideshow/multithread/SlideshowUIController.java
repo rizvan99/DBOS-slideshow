@@ -6,7 +6,9 @@
 package slideshow.multithread;
 
 import java.io.File;
+import java.io.IOException;
 import java.net.URL;
+import java.nio.file.Path;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.ResourceBundle;
@@ -17,6 +19,7 @@ import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Button;
+import javafx.scene.control.Label;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.stage.FileChooser;
@@ -30,8 +33,10 @@ import javafx.stage.Stage;
 public class SlideshowUIController implements Initializable
 {
     private final List<Image> images = new ArrayList<>();
+    private final List<String> filenames = new ArrayList<>();
     private int imageIndex = 0;
     private ExecutorService executor;
+    
     
     @FXML
     private Button btnLoadImages;
@@ -45,18 +50,16 @@ public class SlideshowUIController implements Initializable
     private ImageView imageView;
     @FXML
     private Button btnStop;
+    @FXML
+    private Label lblTitle;
     
     @Override
     public void initialize(URL url, ResourceBundle rb)
     {
-        // TODO
+        
     }    
     
-    //ImageView
-    //FileChooser
-    //save image into image list
-    //execute command
-
+    
     @FXML
     private void handleLoadImages(ActionEvent event)
     {
@@ -70,11 +73,11 @@ public class SlideshowUIController implements Initializable
             for (File file : files)
             {
                 images.add(new Image(file.toURI().toString()));
+                filenames.add(file.getName());
             }
+            lblTitle.setText(filenames.get(0).replace(".png", "").replace(".jpg", ""));
             imageView.setImage(images.get(0));
         }
-        
-        
         
     }
 
@@ -85,6 +88,7 @@ public class SlideshowUIController implements Initializable
         {
             imageIndex = (imageIndex - 1 + images.size()) % images.size();
             imageView.setImage(images.get(imageIndex));
+            lblTitle.setText(filenames.get(imageIndex).replace(".png", "").replace(".jpg", ""));
         }
     }
 
@@ -95,24 +99,23 @@ public class SlideshowUIController implements Initializable
         {
             imageIndex = (imageIndex + 1 + images.size()) % images.size();
             imageView.setImage(images.get(imageIndex));
+            lblTitle.setText(filenames.get(imageIndex).replace(".png", "").replace(".jpg", ""));
         }
     }
 
     @FXML
     private void handleStartSlideshow(ActionEvent event)
     {
-       Runnable slideshow = new Slideshow(imageView, images);
+       Runnable slideshow = new Slideshow(imageView, images, lblTitle, filenames);
        executor = Executors.newSingleThreadExecutor();
        executor.submit(slideshow);
-       
-        
-        
     }
 
     @FXML
     private void handleStopSlideshow(ActionEvent event)
     {
         executor.shutdownNow();
+        images.clear();
     }
-    
+   
 }

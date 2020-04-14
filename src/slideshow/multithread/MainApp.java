@@ -6,10 +6,13 @@
 package slideshow.multithread;
 
 import javafx.application.Application;
+import javafx.application.Platform;
+import javafx.event.EventHandler;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.stage.Stage;
+import javafx.stage.WindowEvent;
 
 /**
  *
@@ -27,6 +30,13 @@ public class MainApp extends Application
         
         stage.setScene(scene);
         stage.show();
+        
+        //Shuts down all threads upon exiting program
+        stage.setOnCloseRequest((WindowEvent e) ->
+        {
+            Platform.exit();
+            System.exit(0);
+        });
     }
 
     /**
